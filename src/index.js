@@ -51,7 +51,7 @@ function renderContent(){
         btnRemoveCompleted.addEventListener('click',handleRemoveCompleted);
 
         dspResults.append(todoList, btnRemoveCompleted);
-    } else dspResults.appendChild(todoList);   
+    } else dspResults.appendChild(todoList);
 }
 
 function handleRemove(itemId){
