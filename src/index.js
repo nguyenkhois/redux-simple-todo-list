@@ -1,3 +1,4 @@
+"use strict";
 import {createStore} from 'redux';
 import css from './styles.css';
 
@@ -5,10 +6,57 @@ import css from './styles.css';
 let action = {
     type: 'YOUR_TYPE',
     task: { id: <task_id>,
-            description: <description>,
-            isDone: <true/false> }
+            description: <task_description>,
+            isDone: <task_status:true/false> }
+}*/
+
+//Functions
+function renderContent(){
+    let allTasks = store.getState(); //Redux method
+    let todoList = document.createElement('ul');
+
+    allTasks.map(item=>{
+        let task = document.createElement('li');
+
+        //Create checkbox
+        let taskCheckBox = document.createElement('input')
+        taskCheckBox.setAttribute('type','checkbox');
+        taskCheckBox.addEventListener('click',()=>handleCheck(item.id));
+
+        //Create description
+        let taskText = document.createTextNode(item.description);
+     
+        //Create button for removing
+        let taskButton = document.createElement('button')
+        taskButton.append(document.createTextNode('Remove'));
+        taskButton.addEventListener('click',()=>handleRemove(item.id));
+
+        //Check task is done or not
+        if (item.isDone){
+            task.classList.add('strike-text');
+            taskCheckBox.setAttribute('checked','');
+        }  else null;
+
+        //Render
+        task.append(taskCheckBox, taskText, taskButton); //Render whole a task
+        todoList.appendChild(task); //Append a task to the Todo list
+    });
+
+    dspResults.innerHTML = '';
+    dspResults.appendChild(todoList);
 }
-*/
+
+function handleRemove(itemId){
+    let action = {type:'REMOVE_TASK', task: {id: itemId}};
+    store.dispatch(action); //Redux method
+    renderContent();
+}
+
+function handleCheck(itemId){
+    let action = {type:'CHECKED', task: {id: itemId}};
+    store.dispatch(action); //Redux method
+    renderContent();
+}
 
 // STEP 1 - Create the reducer
 let userReducer = (state, action) => {
@@ -38,7 +86,6 @@ let userReducer = (state, action) => {
 let store = createStore(userReducer); //Redux method
 
 // STEP 3 - Dispatch our action to the store. It changes the state by store.dispatch(action);
-//Get HTML elements
 let txtInput = document.getElementById('txtInput');
 let dspResults = document.getElementById('dspResults');
 
@@ -55,51 +102,3 @@ txtInput.addEventListener('keydown',e=>{
         renderContent();
     }
 });
-
-//Functions
-function renderContent(){
-    let allTasks = store.getState(); //Redux method
-    let todoList = document.createElement('ul');
-
-    allTasks.map(item=>{
-        let task = document.createElement('li');
-
-        //Create checkbox
-        let taskCheckBox = document.createElement('input')
-        taskCheckBox.setAttribute('type','checkbox');
-        taskCheckBox.addEventListener('click',itemId=>handleCheck(item.id));
-
-        //Create description
-        let taskText = document.createTextNode(item.description);
-     
-        //Create button for removing
-        let taskButton = document.createElement('button')
-        taskButton.append(document.createTextNode('Remove'));
-        taskButton.addEventListener('click',()=>{handleRemove(item.id)});
-
-        //Check task is done or not
-        if (item.isDone){
-            task.classList.add('strike-text');
-            taskCheckBox.setAttribute('checked','');
-        }  else null;
-
-        //Render
-        task.append(taskCheckBox, taskText, taskButton); //Render whole a task
-        todoList.appendChild(task); //Append task to the Todo list
-    });
-
-    dspResults.innerHTML = '';
-    dspResults.appendChild(todoList);
-}
-
-function handleRemove(itemId){
-    let action = {type:'REMOVE_TASK', task: {id: itemId}};
-    store.dispatch(action); //Redux method
-    renderContent();
-}
-
-function handleCheck(itemId){
-    let action = {type:'CHECKED', task: {id: itemId}};
-    store.dispatch(action); //Redux method
-    renderContent();
-}
