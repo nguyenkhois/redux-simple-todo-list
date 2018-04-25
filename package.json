@@ -1,7 +1,7 @@
 {
-  "name": "advjs-reactcssbuildenv",
+  "name": "advjs-reduxtodolist",
   "version": "1.0.0",
-  "description": "The simple React-CSS build environment",
+  "description": "The simple Redux web application",
   "private": true,
   "scripts": {    
     "start": "webpack-dev-server",
@@ -10,8 +10,8 @@
     "build:all": "npm run build && npm run copycss"
   },
   "keywords": [
-    "react",
-    "css",
+    "redux",
+    "todo",
     "webpack",
     "buildenv"
   ],
