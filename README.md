@@ -1,4 +1,4 @@
-# Redux - Simple Toto list
+# Redux - Simple To-Do list
 The simple Redux web application. ([View online demo](https://nguyenkhois.github.io/redux-simple-todo-list/dist/))
 
 ## Screenshot
