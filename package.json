@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "The simple React-CSS build environment",
   "private": true,
-  "scripts": {
+  "scripts": {    
+    "start": "webpack-dev-server",
+    "copycss": "cp ./src/styles.css ./dist/styles.css",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server"
+    "build:all": "npm run build && npm run copycss"
   },
   "keywords": [
     "react",

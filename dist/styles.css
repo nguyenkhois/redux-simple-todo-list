@@ -1,0 +1,43 @@
+body{font-family: Arial, Helvetica, sans-serif;}
+ul{list-style-type: none;}
+button{
+    margin-left: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 10px;    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;    
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+button:hover{background-color: #555555;color: white;}
+
+#app{width: 26em;}
+#app input[type="text"]{
+    /* Clear the user's operating system's theme */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Apply own styles */
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+
+    width: 95%;
+    height: 2em;
+}
+#app input[type="text"]:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
+#app input[type="checkbox"]{width: 1.3em;height: 1.3em;position: relative;}
+#app > div:first-child{padding: 15px;margin:0;position: relative;user-select: none;-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;background: #f8f8f8;border: thin solid #cbcbcb;border-radius: 5px;}
+#app > div > p:first-child {font-size: 2em;font-weight: bold;text-align: center;}
+#app > div > input {padding-left: 0.5em;padding-right: 0.5em;}
+
+.strike-text{text-decoration: line-through; color: #999999;}
