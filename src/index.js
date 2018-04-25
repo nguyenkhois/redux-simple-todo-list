@@ -21,7 +21,7 @@ function renderContent(){
         //Create checkbox
         let taskCheckBox = document.createElement('input')
         taskCheckBox.setAttribute('type','checkbox');
-        taskCheckBox.addEventListener('click',()=>handleCheck(item.id));
+        taskCheckBox.addEventListener('click',()=>handleAction({type:'CHECKED', task: {id: item.id}}));
 
         //Create description
         let taskText = document.createTextNode(item.description);
@@ -29,7 +29,7 @@ function renderContent(){
         //Create button for removing
         let taskButton = document.createElement('button')
         taskButton.append(document.createTextNode('Remove'));
-        taskButton.addEventListener('click',()=>handleRemove(item.id));
+        taskButton.addEventListener('click',()=>handleAction({type:'REMOVE_TASK', task: {id: item.id}}));
 
         //Check task is done or not
         if (item.isDone){
@@ -42,33 +42,21 @@ function renderContent(){
         todoList.appendChild(task); //Append a task to the Todo list
     });
 
-    //Render whole the app and a button "Remove completed" at the end of todo list
+    //Render whole the app and a button at the end of todo list
     dspResults.innerHTML = '';
     if (allTasks.filter(item=>item.isDone).length > 0){
+        //"Remove completed" button
         let btnRemoveCompleted = document.createElement('button')
         btnRemoveCompleted.append(document.createTextNode('Remove completed'));
         btnRemoveCompleted.setAttribute('type','button');
-        btnRemoveCompleted.addEventListener('click',handleRemoveCompleted);
+        btnRemoveCompleted.addEventListener('click',()=>handleAction({type: 'REMOVE_COMPLETED'}));
 
         dspResults.append(todoList, btnRemoveCompleted);
     } else dspResults.appendChild(todoList);
 }
 
-function handleRemove(itemId){
-    let action = {type:'REMOVE_TASK', task: {id: itemId}};
-    store.dispatch(action); //Redux method
-    renderContent();
-}
-
-function handleRemoveCompleted(){
-    let action = {type: 'REMOVE_COMPLETED'};
-    store.dispatch(action);
-    renderContent();
-}
-
-function handleCheck(itemId){
-    let action = {type:'CHECKED', task: {id: itemId}};
-    store.dispatch(action); //Redux method
+function handleAction(objAction){
+    store.dispatch(objAction); //Redux method
     renderContent();
 }
 
@@ -82,14 +70,13 @@ let userReducer = (state, action) => {
         case 'ADD_TASK':
             return state.concat(action.task);
             break;
+        case 'CHECKED':
+            const itemIndex = state.findIndex(item=>item.id === action.task.id);            
+            return state.map((item, index)=> index === itemIndex ? {...item, isDone: !item.isDone} : item);
+            break;
         case 'REMOVE_TASK':
             return state.filter(item=>item.id !== action.task.id);
-            break;
-        case 'CHECKED':
-            const itemIndex = state.findIndex(item=>item.id === action.task.id);
-            const newState = state.map((item, index)=> index === itemIndex ? {...item, isDone: !item.isDone} : item);
-            return newState;
-            break;
+            break;        
         case 'REMOVE_COMPLETED':
             return state.filter(item=>!item.isDone);
             break;
@@ -111,11 +98,8 @@ txtInput.addEventListener('keydown',e=>{
     let userInput = txtInput.value.trim();
     if (e.keyCode === 13 && userInput.length > 0){
         let newTask = { id: Date.now(), description: userInput, isDone: false };
-        let action = { type: 'ADD_TASK', task: newTask };
-        store.dispatch(action); //Redux method
-
+        handleAction({ type: 'ADD_TASK', task: newTask });
         txtInput.value = '';
         txtInput.focus();
-        renderContent();
     }
 });
