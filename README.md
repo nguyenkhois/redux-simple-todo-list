@@ -1,4 +1,4 @@
-# Redux - Toto list
+# Redux - Simple Toto list
 The simple Redux web application. ([View online demo](https://nguyenkhois.github.io/redux-simple-todo-list/dist/))
 
 ## Compatibility
