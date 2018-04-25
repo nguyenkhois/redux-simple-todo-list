@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The simple Redux web application",
   "private": true,
-  "scripts": {    
+  "scripts": {
     "start": "webpack-dev-server",
     "copycss": "cp ./src/styles.css ./dist/styles.css",
     "build": "webpack --mode production",

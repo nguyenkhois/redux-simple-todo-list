@@ -1,6 +1,9 @@
 # Redux - Simple Toto list
 The simple Redux web application. ([View online demo](https://nguyenkhois.github.io/redux-simple-todo-list/dist/))
 
+## Screenshot
+![Screenshot](src/screenshot.png)
+
 ## Compatibility
 Build environment is compatible with:
 * Windows
