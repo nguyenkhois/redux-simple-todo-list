@@ -42,7 +42,7 @@ function renderContent(){
         todoList.appendChild(task); //Append a task to the Todo list
     });
 
-    //Render whole the app with button "Remove completed"
+    //Render whole the app and a button "Remove completed" at the end of todo list
     dspResults.innerHTML = '';
     if (allTasks.filter(item=>item.isDone).length > 0){
         let btnRemoveCompleted = document.createElement('button')
