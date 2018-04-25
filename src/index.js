@@ -37,18 +37,32 @@ function renderContent(){
             taskCheckBox.setAttribute('checked','');
         }  else null;
 
-        //Render
+        //Render Todo list
         task.append(taskCheckBox, taskText, taskButton); //Render whole a task
         todoList.appendChild(task); //Append a task to the Todo list
     });
 
+    //Render whole the app with button "Remove completed"
     dspResults.innerHTML = '';
-    dspResults.appendChild(todoList);
+    if (allTasks.filter(item=>item.isDone).length > 0){
+        let btnRemoveCompleted = document.createElement('button')
+        btnRemoveCompleted.append(document.createTextNode('Remove completed'));
+        btnRemoveCompleted.setAttribute('type','button');
+        btnRemoveCompleted.addEventListener('click',handleRemoveCompleted);
+
+        dspResults.append(todoList, btnRemoveCompleted);
+    } else dspResults.appendChild(todoList);   
 }
 
 function handleRemove(itemId){
     let action = {type:'REMOVE_TASK', task: {id: itemId}};
     store.dispatch(action); //Redux method
+    renderContent();
+}
+
+function handleRemoveCompleted(){
+    let action = {type: 'REMOVE_COMPLETED'};
+    store.dispatch(action);
     renderContent();
 }
 
@@ -75,6 +89,9 @@ let userReducer = (state, action) => {
             const itemIndex = state.findIndex(item=>item.id === action.task.id);
             const newState = state.map((item, index)=> index === itemIndex ? {...item, isDone: !item.isDone} : item);
             return newState;
+            break;
+        case 'REMOVE_COMPLETED':
+            return state.filter(item=>!item.isDone);
             break;
         default:
             return state;

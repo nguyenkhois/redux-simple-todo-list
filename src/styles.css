@@ -39,5 +39,6 @@ button:hover{background-color: #555555;color: white;}
 #app > div:first-child{padding: 15px;margin:0;position: relative;user-select: none;-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;background: #f8f8f8;border: thin solid #cbcbcb;border-radius: 5px;}
 #app > div > p:first-child {font-size: 2em;font-weight: bold;text-align: center;}
 #app > div > input {padding-left: 0.5em;padding-right: 0.5em;}
+#app > div > div > button {padding: 0.5em; border-radius: 20px;}
 
 .strike-text{text-decoration: line-through; color: #999999;}
