@@ -1,5 +1,5 @@
 # Redux - Toto list
-The simple Redux web application. ([View online demo](https://www.vlexikon.com/demo/redux-todo/))
+The simple Redux web application. ([View online demo](https://nguyenkhois.github.io/redux-simple-todo-list/dist/))
 
 ## Compatibility
 Build environment is compatible with:
