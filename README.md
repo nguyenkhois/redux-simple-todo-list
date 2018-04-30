@@ -22,4 +22,5 @@ Webpack Dev Server reload automatically your web browser whenever a change is ma
 
 ## References
 * [Leveling Up with React: Redux](https://css-tricks.com/learning-react-redux/)
+* [React Redux Tutorial for Beginners: The Definitive Guide (2018)](https://www.valentinog.com/blog/react-redux-tutorial-beginners/)
 * [Non-mutating methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Accessor_methods)
