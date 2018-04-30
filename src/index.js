@@ -10,7 +10,7 @@ let action = {
             isDone: <task_status:true/false> }
 }*/
 
-//Functions
+//FUNCTIONS
 function renderContent(){
     let allTasks = store.getState(); //Redux method
     let todoList = document.createElement('ul');
@@ -57,22 +57,20 @@ function renderContent(){
 function handleRemove(itemId){
     let action = {type:'REMOVE_TASK', task: {id: itemId}};
     store.dispatch(action); //Redux method
-    renderContent();
 }
 
 function handleRemoveCompleted(){
     let action = {type: 'REMOVE_COMPLETED'};
     store.dispatch(action);
-    renderContent();
 }
 
 function handleCheck(itemId){
     let action = {type:'CHECKED', task: {id: itemId}};
     store.dispatch(action); //Redux method
-    renderContent();
 }
 
-// STEP 1 - Create the reducer
+//MAIN
+// STEP 1 - Create the reducer - yourReducer(currentState, yourAction)
 let userReducer = (state, action) => {
     if (state === undefined)
         state = [];
@@ -101,6 +99,7 @@ let userReducer = (state, action) => {
 
 // STEP 2 - Create a store by passing in the reducer
 let store = createStore(userReducer); //Redux method
+store.subscribe(renderContent); //Redux method - Rerender automatically whenever the state changed
 
 // STEP 3 - Dispatch our action to the store. It changes the state by store.dispatch(action);
 let txtInput = document.getElementById('txtInput');
@@ -116,6 +115,5 @@ txtInput.addEventListener('keydown',e=>{
 
         txtInput.value = '';
         txtInput.focus();
-        renderContent();
     }
 });
